@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bem vindo a pagina de Usuarios</h1>
+    <h3>Total de usuarios Cadastrados: <%= users.length %></h3>
+    <% if (!users || users.length == 0) { %>
+        <h3>Nenhum usuario encontrado</h3>
+    <% } else { %>
+        <% users.forEach(function(Usuario) { %>
+            <h3><%= Usuario %></h3>
+        <% }) %>
+    <% } %>
+</body>
+</html>
