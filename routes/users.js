@@ -3,13 +3,8 @@ var express = require('express');
 const mysql = require('../mysql')
 var router = express.Router();
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-  let listaUsers = ["Kennyd", "Jainy", "Julia"];
-  res.render('users', { users: listaUsers });
-
-  // Comentado pois `res.send` após `res.render` não é necessário
-  // res.send('Lista de usuarios');
+  
 
   mysql.connect();
   mysql.consultUser()
@@ -25,4 +20,21 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
+
+  router.get('/new', function(req,res){
+    res.render('novoUsuario', {title:"Cadastro do Usuario"})
+  })
+  router.post('/newuser', function(req, res){
+    const {nome,cpf,idade,endereco} = req.body
+    console.log(nome,endereco)
+    let cadastro =  mysql.insertUser(nome,cpf,idade,endereco)
+    if (cadastro){
+      res.send("Efetuado com sucesso")
+    }else{
+      //res.status(304).send("Ocorreu algum problema")
+      res.send("Ocorreu algum problema, RECEBA!!")
+    }
+
+  })
 module.exports = router;
